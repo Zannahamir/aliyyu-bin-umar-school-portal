@@ -1,9 +1,175 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Aliyy Bin Umar School Portal</title><style>body{font-family:Arial;background:#f4f6f8;margin:0;color:#222}header{background:#0b5d3b;color:#fff;padding:15px;text-align:center}header img{width:65px;height:65px;object-fit:contain;background:#fff;border-radius:50%;padding:4px}nav{display:flex;gap:6px;flex-wrap:wrap;background:#fff;padding:10px;position:sticky;top:0;z-index:5;box-shadow:0 2px 5px #bbb}nav button,.btn{border:0;padding:10px 13px;border-radius:7px;background:#0b5d3b;color:#fff;cursor:pointer;margin:3px}nav button{background:#e7eee9;color:#222}nav button.active{background:#0b5d3b;color:#fff}main{max-width:1100px;margin:15px auto;padding:0 10px}section{display:none;background:#fff;padding:18px;border-radius:10px;box-shadow:0 1px 5px #ccc}section.active{display:block}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px}input,select,textarea{width:100%;box-sizing:border-box;padding:10px;border:1px solid #bbb;border-radius:6px}label{font-weight:bold;font-size:13px}table{width:100%;border-collapse:collapse;margin-top:12px;font-size:13px}th,td{border:1px solid #ddd;padding:7px}th{background:#edf3ef}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}.card{padding:17px;background:#f7faf8;border-left:5px solid #0b5d3b;border-radius:8px}.big{font-size:25px;font-weight:bold}.present{background:#dff4e5}.absent{background:#ffe1e1}.red{background:#a22}.gray{background:#666}.blue{background:#285f9e}.small{font-size:12px;color:#eee}@media print{nav,.no-print,button{display:none!important}section{display:none!important;box-shadow:none}section.active{display:block!important}}</style></head><body><header><img src="logo.png"><h2>Aliyy Bin Umar Tahfizul Qur'an Wa Ulumuddeen</h2><div>Student Registration • Attendance • Payment Register</div><div class="small">Behind Umar Wade Wade Filling Station | 07035147904 / 09043842355</div><div style="font-size:12px;margin-top:5px">NEW VERSION • CLASS 1 / CLASS 2 / CLASS 3 • MAZA / MATA</div></header><nav class="no-print"><button data-tab="dashboard">Dashboard</button><button data-tab="students">Students</button><button data-tab="attendance">Attendance</button><button data-tab="payments">Payments</button><button data-tab="reports">Reports</button><button data-tab="backup">Backup</button></nav><main>
-<section id="dashboard" class="active"><h3>Dashboard</h3><div class="cards"><div class="card">Registered Students<div class="big" id="ds">0</div></div><div class="card">Present Today<div class="big" id="dp">0</div></div><div class="card">Absent Today<div class="big" id="da">0</div></div><div class="card">Total Payments<div class="big" id="dm">₦0</div></div></div><button class="btn" onclick="tab('students')">Register Student</button><button class="btn" onclick="tab('attendance')">Mark Attendance</button><button class="btn" onclick="tab('payments')">Record Payment</button></section>
-<section id="students"><h3>Student Registration</h3><form id="sf"><div class="grid"><div><label>Registration No.</label><input id="reg" readonly></div><div><label>Date</label><input id="rdate" type="date" required></div><div><label>Full Name</label><input id="name" required></div><div><label>Date of Birth</label><input id="dob" type="date"></div><div><label>Age</label><input id="age" type="number"></div><div><label>Gender</label><select id="gender"><option>Male</option><option>Female</option></select></div><div><label>Class / Level</label><input id="class"></div><div><label>Programme</label><select id="prog"><option>Tahfizul Qur'an</option><option>Ulumuddeen</option><option>Both</option></select></div><div><label>Father/Guardian</label><input id="guardian"></div><div><label>Relationship</label><input id="rel"></div><div><label>Phone</label><input id="phone"></div><div><label>Alternative Phone</label><input id="alt"></div><div><label>Occupation</label><input id="occ"></div><div><label>Address</label><textarea id="addr"></textarea></div><div><label>Previous School/Madrasah</label><input id="prev"></div><div><label>Qur'an Level</label><input id="ql"></div><div><label>Medical / Special Notes</label><textarea id="med"></textarea></div></div><button class="btn">Save Student</button><button type="button" class="btn gray" onclick="clearForm()">Clear</button></form><hr><input class="no-print" id="sq" placeholder="Search student..." oninput="students()"><div id="st"></div></section>
-<section id="attendance"><h3>Daily Attendance Register</h3><div class="grid no-print"><div><label>Date</label><input id="adate" type="date" onchange="attendance()"></div><div><label>Class</label><select id="aclass" onchange="attendance()"><option value="">All Classes</option></select></div><div><label>Search</label><input id="aq" oninput="attendance()"></div></div><button class="btn no-print" onclick="allAtt('Present')">Mark All Present</button><button class="btn red no-print" onclick="allAtt('Absent')">Mark All Absent</button><button class="btn blue no-print" onclick="window.print()">Print</button><div id="at"></div></section>
-<section id="payments"><h3>Payment Register</h3><form id="pf"><div class="grid"><div><label>Student</label><select id="pstudent" required></select></div><div><label>Date</label><input id="pdate" type="date" required></div><div><label>Payment Type</label><select id="ptype"><option>Registration Fee</option><option>School Fee</option><option>Qur'an / Tahfiz Fee</option><option>Exam Fee</option><option>Uniform</option><option>Books</option><option>Other</option></select></div><div><label>Amount Paid (₦)</label><input id="amount" type="number" min="0" required></div><div><label>Receipt No.</label><input id="receipt"></div><div><label>Payment Method</label><select id="method"><option>Cash</option><option>Bank Transfer</option><option>POS</option><option>Other</option></select></div><div><label>Note</label><input id="note"></div></div><button class="btn">Save Payment</button></form><hr><input class="no-print" id="pq" placeholder="Search payment..." oninput="payments()"><div id="pt"></div></section>
-<section id="reports"><h3>Reports</h3><div class="grid no-print"><select id="rclass" onchange="reports()"><option value="">All Classes</option></select><input id="from" type="date" onchange="reports()"><input id="to" type="date" onchange="reports()"></div><div id="rc"></div><button class="btn blue no-print" onclick="window.print()">Print Report</button></section>
-<section id="backup"><h3>Backup & Restore</h3><button class="btn" onclick="backup()">Download Backup</button><label class="btn gray">Restore Backup<input type="file" accept=".json" onchange="restore(event)" style="display:none"></label><button class="btn red" onclick="wipe()">Delete ALL Data</button><p>Data is saved in this browser on this device. Make regular backups.</p></section></main>
-<script>
-let D=JSON.parse(localStorage.getItem('ABU_PORTAL')||'{"students":[],"attendance":{},"payments":[]}');const $=x=>document.getElementById(x),today=()=>new Date().toISOString().slice(0,10);function save(){localStorage.setItem('ABU_PORTAL',JSON.stringify(D));refresh()}function money(x){return '₦'+Number(x||0).toLocaleString('en-NG',{minimumFractionDigits:2})}function esc(x){return String(x??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}function tab(id){document.querySelectorAll('section').forEach(x=>x.classList.remove('active'));$(id).classList.add('active');document.querySelectorAll('nav button').forEach(x=>x.classList.toggle('active',x.dataset.tab==id));refresh()}document.querySelectorAll('nav button').forEach(x=>x.onclick=()=>tab(x.dataset.tab));function next(){let y=new Date().getFullYear(),n=D.students.map(s=>+s.reg.split('-')[2]||0);return 'ABU-'+y+'-'+String((n.length?Math.max(...n):0)+1).padStart(4,'0')}function clearForm(){$('sf').reset();$('reg').value=next();$('rdate').value=today()}$('sf').onsubmit=e=>{e.preventDefault();let s={reg:$('reg').value,date:$('rdate').value,name:$('name').value,dob:$('dob').value,age:$('age').value,gender:$('gender').value,class:$('class').value,prog:$('prog').value,guardian:$('guardian').value,rel:$('rel').value,phone:$('phone').value,alt:$('alt').value,occ:$('occ').value,addr:$('addr').value,prev:$('prev').value,ql:$('ql').value,med:$('med').value};let i=D.students.findIndex(x=>x.reg==s.reg);i>=0?D.students[i]=s:D.students.push(s);save();alert('Student saved successfully');clearForm()};function cls(){return [...new Set(D.students.map(s=>s.class).filter(Boolean))].sort()}function fill(id){let e=$(id),v=e.value;e.innerHTML='<option value="">All Classes</option>'+cls().map(c=>'<option>'+esc(c)+'</option>').join('');if([...e.options].some(o=>o.value==v))e.value=v}function students(){fill('aclass');fill('rclass');let q=($('sq').value||'').toLowerCase(),a=D.students.filter(s=>!q||s.name.toLowerCase().includes(q)||s.reg.toLowerCase().includes(q));$('st').innerHTML='<table><tr><th>Reg No</th><th>Name</th><th>Class</th><th>Guardian</th><th>Phone</th><th>Action</th></tr>'+a.map(s=>`<tr><td>${esc(s.reg)}</td><td>${esc(s.name)}</td><td>${esc(s.class)}</td><td>${esc(s.guardian)}</td><td>${esc(s.phone)}</td><td><button class="btn red" onclick="delStudent('${s.reg}')">Delete</button></td></tr>`).join('')+'</table>'}function delStudent(r){if(confirm('Delete this student?')){D.students=D.students.filter(s=>s.reg!=r);save()}}function key(d,r){return d+'|'+r}function setA(r,v){D.attendance[key($('adate').value,r)]=v;save()}function attendance(){fill('aclass');let d=$('adate').value||today(),c=$('aclass').value,q=($('aq').value||'').toLowerCase(),a=D.students.filter(s=>(!c||s.class==c)&&(!q||s.name.toLowerCase().includes(q)||s.reg.toLowerCase().includes(q)));$('at').innerHTML='<table><tr><th>#</th><th>Reg No</th><th>Student</th><th>Class</th><th>Status</th></tr>'+a.map((s,i)=>{let v=D.attendance[key(d,s.reg)]||'';return `<tr class="${v.toLowerCase()}"><td>${i+1}</td><td>${esc(s.reg)}</td><td>${esc(s.name)}</td><td>${esc(s.class)}</td><td><button class="btn" onclick="setA('${s.reg}','Present')">Present</button><button class="btn red" onclick="setA('${s.reg}','Absent')">Absent</button></td></tr>`}).join('')+'</table>'}function allAtt(v){let d=$('adate').value||today(),c=$('aclass').value;D.students.filter(s=>!c||s.class==c).forEach(s=>D.attendance[key(d,s.reg)]=v);save()}$('pf').onsubmit=e=>{e.preventDefault();D.payments.push({reg:$('pstudent').value,date:$('pdate').value,type:$('ptype').value,amount:+$('amount').value,receipt:$('receipt').value,method:$('method').value,note:$('note').value});save();alert('Payment saved successfully');$('pf').reset();$('pdate').value=today()};function payments(){let q=($('pq').value||'').toLowerCase(),a=D.payments.filter(p=>{let s=D.students.find(x=>x.reg==p.reg);return !q||(s?.name||'').toLowerCase().includes(q)||p.reg.toLowerCase().includes(q)||p.receipt.toLowerCase().includes(q)}),t=a.reduce((z,p)=>z+p.amount,0);$('pt').innerHTML='<p><b>Total:</b> '+money(t)+'</p><table><tr><th>Date</th><th>Student</th><th>Type</th><th>Amount</th><th>Receipt</th><th>Method</th><th>Action</th></tr>'+a.map(p=>{let s=D.students.find(x=>x.reg==p.reg);return `<tr><td>${esc(p.date)}</td><td>${esc(s?.name||'Unknown')}</td><td>${esc(p.type)}</td><td>${money(p.amount)}</td><td>${esc(p.receipt)}</td><td>${esc(p.method)}</td><td><button class="btn red" onclick="delPay(${D.payments.indexOf(p)})">Delete</button></td></tr>`}).join('')+'</table>'}function delPay(i){if(confirm('Delete this payment?')){D.payments.splice(i,1);save()}}function reports(){fill('rclass');let c=$('rclass').value,f=$('from').value,t=$('to').value,s=D.students.filter(x=>!c||x.class==c),p=D.payments.filter(x=>(!f||x.date>=f)&&(!t||x.date<=t)&&s.some(z=>z.reg==x.reg)),tot=p.reduce((a,x)=>a+x.amount,0);$('rc').innerHTML='<div class="cards"><div class="card">Students<div class="big">'+s.length+'</div></div><div class="card">Payments<div class="big">'+money(tot)+'</div></div></div><table><tr><th>Reg No</th><th>Name</th><th>Class</th><th>Paid</th></tr>'+s.map(x=>'<tr><td>'+esc(x.reg)+'</td><td>'+esc(x.name)+'</td><td>'+esc(x.class)+'</td><td>'+money(p.filter(z=>z.reg==x.reg).reduce((a,z)=>a+z.amount,0))+'</td></tr>').join('')+'</table>'}function refresh(){let d=today(),v=D.students.map(s=>D.attendance[key(d,s.reg)]);$('ds').textContent=D.students.length;$('dp').textContent=v.filter(x=>x=='Present').length;$('da').textContent=v.filter(x=>x=='Absent').length;$('dm').textContent=money(D.payments.reduce((a,p)=>a+p.amount,0));$('reg').value=$('reg').value||next();$('rdate').value=$('rdate').value||today();$('adate').value=$('adate').value||today();$('pdate').value=$('pdate').value||today();$('pstudent').innerHTML='<option value="">Select Student</option>'+D.students.map(s=>`<option value="${esc(s.reg)}">${esc(s.name)} — ${esc(s.reg)}</option>`).join('');students();attendance();payments();reports()}function backup(){let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(D,null,2)],{type:'application/json'}));a.download='ABU_Backup_'+today()+'.json';a.click()}function restore(e){let r=new FileReader;r.onload=()=>{try{let x=JSON.parse(r.result);if(!x.students||!x.attendance||!x.payments)throw 0;D=x;save();alert('Backup restored')}catch{alert('Invalid backup file')}};r.readAsText(e.target.files[0])}function wipe(){if(confirm('Delete ALL students, attendance and payment data?')){D={students:[],attendance:{},payments:[]};save()}}$('adate').value=today();$('pdate').value=today();$('rdate').value=today();$('reg').value=next();refresh();</script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Aliyy Bin Umar — School Portal</title>
+  <link rel="icon" href="/logo.png">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div id="loginView" class="login-wrap">
+    <div class="login-card">
+      <img src="/logo.png" class="logo large" alt="School logo">
+      <h1>Aliyy Bin Umar</h1>
+      <p>Tahfizul Qur'an Wa Ulumuddeen</p>
+      <p><small>ONLINE SCHOOL PORTAL • CLASS 1 / CLASS 2 / CLASS 3 • MAZA / MATA</small></p>
+      <form id="loginForm">
+        <input id="loginUser" placeholder="Username" value="admin" autocomplete="username" required>
+        <input id="loginPass" type="password" placeholder="Password" autocomplete="current-password" required>
+        <button class="primary full">Login</button>
+      </form>
+      <div id="loginMsg" class="msg"></div>
+    </div>
+  </div>
+
+  <div id="appView" class="hidden">
+    <header class="topbar">
+      <div class="brand">
+        <img src="/logo.png" class="logo" alt="">
+        <div><strong id="schoolNameTop">Aliyy Bin Umar</strong><small>Tahfizul Qur'an Wa Ulumuddeen</small></div>
+      </div>
+      <div class="top-actions">
+        <button id="backupBtn" class="ghost">Backup</button>
+        <button id="logoutBtn" class="danger">Logout</button>
+      </div>
+    </header>
+
+    <div class="layout">
+      <aside class="sidebar">
+        <button data-page="dashboard" class="nav active">🏠 Dashboard</button>
+        <button data-page="students" class="nav">👨‍🎓 Students</button>
+        <button data-page="attendance" class="nav">✅ Attendance / Presence</button>
+        <button data-page="register" class="nav">➕ Register Student</button>
+        <button data-page="classes" class="nav">🏫 Classes</button>
+        <button data-page="fees" class="nav">💳 Fees & Payments</button>
+        <button data-page="quran" class="nav">📖 Qur'an Records</button>
+        <button data-page="reports" class="nav">🖨️ Reports</button>
+        <button data-page="settings" class="nav">⚙️ Settings</button>
+      </aside>
+
+      <main class="content">
+        <div id="toast" class="toast"></div>
+
+        <section id="page-dashboard" class="page">
+          <div class="page-head"><div><h2>Dashboard</h2><p>School management overview</p></div></div>
+          <div class="cards">
+            <div class="card"><span>Students</span><b id="statStudents">0</b></div>
+            <div class="card"><span>Classes</span><b id="statClasses">0</b></div>
+            <div class="card"><span>Total Fees</span><b id="statFees">₦0</b></div>
+            <div class="card"><span>Qur'an Records</span><b id="statQuran">0</b></div>
+          </div>
+          <div class="panel">
+            <h3>School information</h3>
+            <p><strong>Address:</strong> <span id="schoolAddress">—</span></p>
+            <p><strong>Phone:</strong> <span id="schoolPhone">—</span></p>
+          </div>
+        </section>
+
+        <section id="page-students" class="page hidden">
+          <div class="page-head"><div><h2>Students</h2><p>Search, view, edit and print student records</p></div><button class="primary" onclick="showPage('register')">+ Register</button></div>
+          <div class="toolbar"><input id="studentSearch" placeholder="Search by name or registration number..."><select id="studentClassFilter" onchange="loadStudents()"><option value="">All Students</option><option>Class 1</option><option>Class 2</option><option>Class 3</option></select><select id="studentGenderFilter" onchange="loadStudents()"><option value="">Duka</option><option value="Male">Maza</option><option value="Female">Mata</option></select><button onclick="loadStudents()">Search</button></div>
+          <div class="table-wrap"><table><thead><tr><th>Reg. No.</th><th>Name</th><th>Class</th><th>Gender</th><th>Guardian</th><th>Phone</th><th>Actions</th></tr></thead><tbody id="studentsTable"></tbody></table></div>
+        </section>
+
+        <section id="page-register" class="page hidden">
+          <div class="page-head"><div><h2 id="registerTitle">Register Student</h2><p>Enter the student's details</p></div></div>
+          <form id="studentForm" class="form-grid">
+            <input type="hidden" id="studentId">
+            <label>Full Name *<input id="full_name" required></label>
+            <label>Date of Birth<input id="dob" type="date"></label>
+            <label>Gender<select id="gender"><option value="">Select</option><option>Male</option><option>Female</option></select></label>
+            <label>Class *<select id="class_level" required><option value="">Select Class</option><option>Class 1</option><option>Class 2</option><option>Class 3</option></select></label>
+            <label>Programme<input id="programme" placeholder="e.g. Tahfiz / Ulumuddeen"></label>
+            <label>Nationality<input id="nationality" value="Nigerian"></label>
+            <label>State<input id="state"></label>
+            <label>LGA<input id="lga"></label>
+            <label>Parent / Guardian<input id="guardian"></label>
+            <label>Guardian Phone<input id="guardian_phone"></label>
+            <label>Alternative Phone<input id="alt_phone"></label>
+            <label>Previous School<input id="previous_school"></label>
+            <label class="wide">Address<textarea id="address"></textarea></label>
+            <label>Qur'an Level<input id="quran_level" placeholder="e.g. Juz Amma / 5 Juz"></label>
+            <label>Medical / Special Information<input id="medical"></label>
+            <label class="wide">Notes<textarea id="notes"></textarea></label>
+            <div class="wide actions"><button type="submit" class="primary" id="saveStudentBtn">Save Student</button><button type="button" onclick="resetStudentForm()">Clear</button></div>
+          </form>
+        </section>
+
+        <section id="page-attendance" class="page hidden">
+          <div class="page-head"><div><h2>Attendance / Presence</h2><p>Mark Present, Absent or Late for each day</p></div></div>
+          <div class="toolbar">
+            <label>Date<input id="att_date" type="date"></label>
+            <label>Class<select id="att_class"><option value="">All Students</option><option>Class 1</option><option>Class 2</option><option>Class 3</option></select></label>
+            <label>Gender<select id="att_gender"><option value="">Duka</option><option value="Male">Maza</option><option value="Female">Mata</option></select></label>
+            <button onclick="loadAttendance()">Load</button>
+            <button class="primary" onclick="saveAttendance()">Save Attendance</button>
+          </div>
+          <div class="table-wrap"><table><thead><tr><th>Reg. No.</th><th>Name</th><th>Class</th><th>Gender</th><th>Status</th></tr></thead><tbody id="attendanceTable"></tbody></table></div>
+        </section>
+
+        <section id="page-classes" class="page hidden">
+          <div class="page-head"><div><h2>Classes</h2><p>Class 1, Class 2 and Class 3 — with male/female totals</p></div></div>
+          <div id="classesGrid" class="cards"></div>
+        </section>
+
+        <section id="page-fees" class="page hidden">
+          <div class="page-head"><div><h2>Fees & Payments</h2><p>Record school payments</p></div></div>
+          <div class="toolbar"><select id="feeClassFilter" onchange="loadFees()"><option value="">All Students</option><option>Class 1</option><option>Class 2</option><option>Class 3</option></select><select id="feeGenderFilter" onchange="loadFees()"><option value="">Duka</option><option value="Male">Maza</option><option value="Female">Mata</option></select></div><form id="feeForm" class="form-grid compact">
+            <label>Student<select id="fee_student" required></select></label>
+            <label>Amount (₦)<input id="fee_amount" type="number" min="0" step="0.01" required></label>
+            <label>Fee Type<input id="fee_type" placeholder="Tuition / Registration / Other" required></label>
+            <label>Date<input id="fee_date" type="date"></label>
+            <label>Receipt No.<input id="fee_receipt"></label>
+            <label>Note<input id="fee_note"></label>
+            <div class="wide actions"><button class="primary">Save Payment</button></div>
+          </form>
+          <div class="table-wrap"><table><thead><tr><th>Date</th><th>Student</th><th>Reg.</th><th>Type</th><th>Amount</th><th>Receipt</th><th></th></tr></thead><tbody id="feesTable"></tbody></table></div>
+        </section>
+
+        <section id="page-quran" class="page hidden">
+          <div class="page-head"><div><h2>Qur'an Records</h2><p>Track memorisation and revision</p></div></div>
+          <form id="quranForm" class="form-grid compact">
+            <label>Student<select id="quran_student" required></select></label>
+            <label>Surah / Juz / Part<input id="quran_part" placeholder="e.g. Juz Amma" required></label>
+            <label>Status<select id="quran_status"><option>Completed</option><option>In Progress</option><option>Revision</option></select></label>
+            <label>Date<input id="quran_date" type="date"></label>
+            <label class="wide">Note<input id="quran_note"></label>
+            <div class="wide actions"><button class="primary">Save Qur'an Record</button></div>
+          </form>
+          <div class="table-wrap"><table><thead><tr><th>Date</th><th>Student</th><th>Reg.</th><th>Part</th><th>Status</th><th>Note</th><th></th></tr></thead><tbody id="quranTable"></tbody></table></div>
+        </section>
+
+        <section id="page-reports" class="page hidden">
+          <div class="page-head"><div><h2>Reports</h2><p>Print and export school information</p></div></div>
+          <div class="report-actions">
+            <button class="primary" onclick="printStudents()">Print Student List</button>
+            <button onclick="window.open('/api/export/students.csv','_blank')">Export Students CSV</button>
+            <button onclick="window.open('/api/backup.json','_blank')">Download Full Backup</button>
+          </div>
+          <div id="reportArea" class="panel"></div>
+        </section>
+
+        <section id="page-settings" class="page hidden">
+          <div class="page-head"><div><h2>Settings</h2><p>School details and administrator password</p></div></div>
+          <form id="settingsForm" class="form-grid">
+            <label class="wide">School Name<input id="set_school_name" required></label>
+            <label class="wide">Address<input id="set_address" required></label>
+            <label class="wide">Phone<input id="set_phone" required></label>
+            <div class="wide actions"><button class="primary">Save School Settings</button></div>
+          </form>
+          <hr>
+          <h3>Change administrator password</h3>
+          <form id="passwordForm" class="form-grid compact">
+            <label>Current Password<input id="current_password" type="password" required></label>
+            <label>New Password<input id="new_password" type="password" minlength="8" required></label>
+            <div class="wide actions"><button class="primary">Change Password</button></div>
+          </form>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>

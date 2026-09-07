@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: aliiyy-bin-umar-school-portal
+    runtime: node
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: aliiyy-bin-umar-db
+          property: connectionString
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: ADMIN_USERNAME
+        value: admin
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: NODE_ENV
+        value: production
+
+databases:
+  - name: aliiyy-bin-umar-db
+    databaseName: aliiyy_school
+    user: aliiyy_admin
